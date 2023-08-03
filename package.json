@@ -1,0 +1,17 @@
+{
+  "name": "1-challenge",
+  "version": "1.0.0",
+  "description": "Desafio de QA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Barbara Pires",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.17.2"
+  },
+  "devDependencies": {
+    "mochawesome": "^7.1.3"
+  }
+}
