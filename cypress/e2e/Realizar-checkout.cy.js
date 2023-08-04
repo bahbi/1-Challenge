@@ -1,3 +1,54 @@
+import CarroCompras from '../support/generic/carrinho';
+import selecaoProdutox from '../support/generic/produtoX';
+
+  describe('Realizar checkout', () => {
+    it('Adicionar produto ao carrinho e preenche para o pagamento', () => {
+      cy.visit('https://magento.softwaretestingboard.com');
+  
+          selecaoProdutox.produtoX();
+          CarroCompras.marcaritens();
+          CarroCompras.submeterCompra();
+
+      cy.wait(1000); 
+      cy.get('.minicart-wrapper').should('be.visible');
+      cy.wait(3000);
+      
+      
+      cy.get('.showcart').click();
+      cy.wait(3000);
+
+      cy.get('#top-cart-btn-checkout').click();
+
+      cy.wait(5000);
+      cy.get('#customer-email').type('ritthy.foster@example.com');
+
+      cy.get('input[name="firstname"]').type('Ritthy');
+      cy.get('input[name="lastname"]').type('Foster');
+      cy.get('input[name="street[0]"]').type('8821 Adams St');
+      cy.get('input[name="city"]').type('Detroit'); //
+
+
+      cy.get('select[name="region_id"]').select('Michigan'); //não ta generico
+
+      cy.wait(1000);
+
+
+      cy.get('input[name="postcode"]').type('63104'); //add com validade
+      cy.get('select[name="country_id"]').select('United States'); //não ta generico
+      cy.get('input[name="telephone"]').type('00000-0000'); //add com validade
+      cy.get('input[type="radio"][value="tablerate_bestway"]').check();
+
+      // Aguarde um momento para visualização
+      cy.wait(1000);
+      cy.get('.button.action.continue.primary').click();
+      cy.wait(1000);
+      cy.get('.action.primary.checkout').click();
+      cy.wait(1000);
+      cy.get('.checkout-onepage-success.page-layout-1column').should('be.visible');
+
+    })
+  })
+
 // describe('Produto no carrinho', () => {
 //     it('Adicionar produto ao carrinho', () => {
 //       cy.visit('https://magento.softwaretestingboard.com');
@@ -88,56 +139,4 @@
 
 //     })
 //   })
-
-import CarroCompras from '../support/generic/carrinho';
-import selecaoProdutox from '../support/generic/produtoX';
-
-  describe('Realizar checkout', () => {
-    it('Adicionar produto ao carrinho e preenche para o pagamento', () => {
-      cy.visit('https://magento.softwaretestingboard.com');
-  
-          selecaoProdutox.produtoX();
-          CarroCompras.marcaritens();
-          CarroCompras.submeterCompra();
-
-      cy.wait(1000); 
-      cy.get('.minicart-wrapper').should('be.visible');
-      cy.wait(3000);
-      
-      
-      cy.get('.showcart').click();
-      cy.wait(3000);
-
-      cy.get('#top-cart-btn-checkout').click();
-
-      cy.wait(5000);
-      cy.get('#customer-email').type('ritthy.foster@example.com');
-
-      cy.get('input[name="firstname"]').type('Ritthy');
-      cy.get('input[name="lastname"]').type('Foster');
-      cy.get('input[name="street[0]"]').type('8821 Adams St');
-      cy.get('input[name="city"]').type('Detroit'); //
-
-
-      cy.get('select[name="region_id"]').select('Michigan'); //não ta generico
-
-      cy.wait(1000);
-
-
-      cy.get('input[name="postcode"]').type('63104'); //add com validade
-      cy.get('select[name="country_id"]').select('United States'); //não ta generico
-      cy.get('input[name="telephone"]').type('00000-0000'); //add com validade
-      cy.get('input[type="radio"][value="tablerate_bestway"]').check();
-
-      cy.wait(1000);
-      cy.get('.button.action.continue.primary').click();
-      cy.wait(1000);
-      cy.get('.action.primary.checkout').click();
-      cy.wait(1000);
-      cy.get('.checkout-onepage-success.page-layout-1column').should('be.visible');
-
-    })
-  })
-
-
 

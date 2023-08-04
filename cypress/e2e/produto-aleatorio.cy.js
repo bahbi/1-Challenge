@@ -1,3 +1,35 @@
+import CarroCompras from '../support/generic/carrinho';
+import produtoaleatorio from '../support/generic/aletorioProduto';
+
+describe('produto aleatório', () => {
+
+
+    it('Adicionar um produto aleatório do catalogo de moda masculina no carrinho', () => {
+      
+      produtoaleatorio.acessarPaginaW();
+  
+      cy.wait(1000);
+
+      produtoaleatorio.escolhaAleatoria();
+  
+        //------------------------------------------------
+        cy.wait(1000);
+  
+        cy.get('[id="option-label-size-143"]').as('sizeOption');
+  
+          CarroCompras.marcaritens();
+          CarroCompras.submeterCompra();
+            
+  
+        cy.wait(1000); 
+  
+        cy.get('.minicart-wrapper').should('be.visible');
+  
+      //});
+    });
+  })
+
+
 // describe('Escolher um produto aleatório', () => {
 //   beforeEach(() => {
 //     cy.visit('https://magento.softwaretestingboard.com');
@@ -47,36 +79,3 @@
 //     });
 //   });
 // });
-
-import CarroCompras from '../support/generic/carrinho';
-import produtoaleatorio from '../support/generic/aletorioProduto';
-
-describe('produto aleatório', () => {
-
-
-    it('Adicionar um produto aleatório do catalogo de moda masculina no carrinho', () => {
-      
-      produtoaleatorio.acessarPaginaW();
-  
-      cy.wait(1000);
-
-      produtoaleatorio.escolhaAleatoria();
-  
-        //------------------------------------------------
-        cy.wait(1000);
-  
-        cy.get('[id="option-label-size-143"]').as('sizeOption');
-  
-          CarroCompras.marcaritens();
-          CarroCompras.submeterCompra();
-            
-  
-        cy.wait(1000); 
-  
-        cy.get('.minicart-wrapper').should('be.visible');
-  
-      //});
-    });
-  })
-
-
